@@ -20,5 +20,5 @@ func main() {
 
 	Routes(r)
 
-	r.Run()
+	r.Run(":3003")
 }

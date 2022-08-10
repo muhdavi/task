@@ -6,12 +6,32 @@
       Create New Task
     </div>
     <div class="card-body">
-      <form class="row" method="post">
-        <div class="col-auto">
-          <label for="content" class="visually-hidden">Content</label>
-          <input type="text" class="form-control" id="content" name="content" placeholder="Content">
+      <form class="row row-cols-lg-auto g-3 align-items-center" method="post">
+        <div class="col-12">
+          <label class="visually-hidden" for="content">Isi Task</label>
+          <div class="input-group">
+            <div class="input-group-text">Isi Task</div>
+            <input type="text" class="form-control" id="content" name="content" placeholder="Task">
+          </div>
         </div>
-        <div class="col-auto">
+
+        <div class="col-12">
+          <label class="visually-hidden" for="person">Assign to</label>
+          <div class="input-group">
+            <div class="input-group-text">Assign to</div>
+            <input type="text" class="form-control" id="person" name="person" placeholder="Assign to">
+          </div>
+        </div>
+
+        <div class="col-12">
+          <label class="visually-hidden" for="duedate">Due Date</label>
+          <div class="input-group">
+            <div class="input-group-text">Due Date</div>
+            <input type="text" class="form-control" id="duedate" name="duedate" placeholder="Due Date">
+          </div>
+        </div>
+
+        <div class="col-12">
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </form>
@@ -27,7 +47,7 @@
         {{if $task.IsDone}}
         {{ add $index 1 }} - <del>{{ $task.Content }}</del>
         {{ else }}
-        {{ add $index 1 }} - {{ $task.Content }}
+        {{ add $index 1 }} - {{ $task.Content }} - {{ $task.Person }} - {{ $task.DueDate }}
         {{ end }}
         <a href="/tasks/{{ $task.ID }}/delete">Delete</a>
         |

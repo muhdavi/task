@@ -49,8 +49,10 @@ func (TaskController) Detail(c *gin.Context) {
 func (TaskController) Create(c *gin.Context) {
 	db := database.Instance()
 	content := c.PostForm("content")
+	person := c.PostForm("person")
+	due_date := c.PostForm("duedate")
 
-	db.Create(&models.Task{Content: content})
+	db.Create(&models.Task{Content: content, Person: person, DueDate: due_date})
 
 	c.Redirect(http.StatusFound, "/tasks")
 }
