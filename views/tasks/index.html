@@ -1,9 +1,9 @@
-{{ define "notes/index" }}
+{{ define "tasks/index" }}
 {{ template "globals/before" .}}
 <div class="container">
   <div class="card mt-4">
     <div class="card-header">
-      Create New Note
+      Create New Task
     </div>
     <div class="card-body">
       <form class="row" method="post">
@@ -29,12 +29,12 @@
         {{ else }}
         {{ add $index 1 }} - {{ $note.Content }}
         {{ end }}
-        <a href="/notes/{{ $note.ID }}/delete">Delete</a>
+        <a href="/tasks/{{ $note.ID }}/delete">Delete</a>
         |
         {{if $note.IsDone}}
-        <a href="/notes/{{ $note.ID }}/done">UnDone</a>
+        <a href="/tasks/{{ $note.ID }}/done">UnDone</a>
         {{ else }}
-        <a href="/notes/{{ $note.ID }}/done">Done</a>
+        <a href="/tasks/{{ $note.ID }}/done">Done</a>
         {{ end }}
       </li>
       {{ end }}

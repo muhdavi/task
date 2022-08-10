@@ -11,24 +11,19 @@ import (
 type TaskController struct{}
 
 func (TaskController) Root(c *gin.Context) {
-	c.Redirect(http.StatusFound, "/notes")
+	c.Redirect(http.StatusFound, "/tasks")
 }
 
 func (TaskController) Index(c *gin.Context) {
 	db := database.Instance()
 
 	query := c.DefaultQuery("q", "")
-	var notes []models.Task
-	db.Find(&notes, query)
+	var tasks []models.Task
+	db.Find(&tasks, query)
 
-	//c.JSON(http.StatusOK, gin.H{
-	//	"message": "Data successfully!",
-	//	"notes":   notes,
-	//})
-
-	c.HTML(http.StatusOK, "notes/index", gin.H{
-		"title": "Notes Index",
-		"notes": notes,
+	c.HTML(http.StatusOK, "tasks/index", gin.H{
+		"title": "Tasks Index",
+		"tasks": tasks,
 	})
 }
 
@@ -36,8 +31,8 @@ func (TaskController) Detail(c *gin.Context) {
 	db := database.Instance()
 	id, _ := strconv.Atoi(c.Param("id"))
 
-	var note models.Task
-	result := db.First(&note, id)
+	var task models.Task
+	result := db.First(&task, id)
 
 	if result.RowsAffected == 0 {
 		c.JSON(http.StatusNotFound, gin.H{
@@ -46,7 +41,7 @@ func (TaskController) Detail(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "Data successfully!",
-			"note":    note,
+			"task":    task,
 		})
 	}
 }
@@ -57,11 +52,7 @@ func (TaskController) Create(c *gin.Context) {
 
 	db.Create(&models.Task{Content: content})
 
-	//c.JSON(http.StatusCreated, gin.H{
-	//	"message": "Data created!",
-	//})
-
-	c.Redirect(http.StatusFound, "/notes")
+	c.Redirect(http.StatusFound, "/tasks")
 }
 
 func (TaskController) Delete(c *gin.Context) {
@@ -70,11 +61,7 @@ func (TaskController) Delete(c *gin.Context) {
 
 	db.Delete(&models.Task{}, id)
 
-	//c.JSON(http.StatusOK, gin.H{
-	//	"message": "Data deleted!",
-	//})
-
-	c.Redirect(http.StatusFound, "/notes")
+	c.Redirect(http.StatusFound, "/tasks")
 }
 
 func (TaskController) Update(c *gin.Context) {
@@ -95,16 +82,12 @@ func (TaskController) Done(c *gin.Context) {
 	db := database.Instance()
 	id, _ := strconv.Atoi(c.Param("id"))
 
-	var note models.Task
-	db.Find(&note, id)
+	var task models.Task
+	db.Find(&task, id)
 
-	note.IsDone = !note.IsDone
+	task.IsDone = !task.IsDone
 
-	db.Save(&note)
+	db.Save(&task)
 
-	//c.JSON(http.StatusOK, gin.H{
-	//	"message": "Data updated!",
-	//})
-
-	c.Redirect(http.StatusFound, "/notes")
+	c.Redirect(http.StatusFound, "/tasks")
 }
