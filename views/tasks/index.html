@@ -19,22 +19,22 @@
   </div>
   <div class="card mt-4">
     <div class="card-header">
-      Note Lists
+      Task Lists
     </div>
     <ul class="list-group list-group-flush">
-      {{range $index, $note := .notes}}
+      {{range $index, $task := .tasks}}
       <li class="list-group-item">
-        {{if $note.IsDone}}
-        {{ add $index 1 }} - <del>{{ $note.Content }}</del>
+        {{if $task.IsDone}}
+        {{ add $index 1 }} - <del>{{ $task.Content }}</del>
         {{ else }}
-        {{ add $index 1 }} - {{ $note.Content }}
+        {{ add $index 1 }} - {{ $task.Content }}
         {{ end }}
-        <a href="/tasks/{{ $note.ID }}/delete">Delete</a>
+        <a href="/tasks/{{ $task.ID }}/delete">Delete</a>
         |
-        {{if $note.IsDone}}
-        <a href="/tasks/{{ $note.ID }}/done">UnDone</a>
+        {{if $task.IsDone}}
+        <a href="/tasks/{{ $task.ID }}/done">UnDone</a>
         {{ else }}
-        <a href="/tasks/{{ $note.ID }}/done">Done</a>
+        <a href="/tasks/{{ $task.ID }}/done">Done</a>
         {{ end }}
       </li>
       {{ end }}
