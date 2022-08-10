@@ -1,2 +1,2 @@
-# task
+# Aplikasi Tasking dengan Website
 Dalam project ini, Anda adalah seorang Software Developer dari suatu perusahaan. Perusahaan tempat Anda bekerja akan membuat suatu project dan Anda ditunjuk menjadi salah satu developer dalam project tersebut. Project ini adalah project yang mempermudah pegawai-pegawai dari perusahaan untuk mencatat task yang disampaikan ke pegawai yang lain. Project ini diperlukan karena memang para pegawai sering sekali memberikan task ke pegawai lain, tapi lupa bahwa ada task yang diberikan ke pegawai lain beserta dengan tanggal deadline-nya. Mari kita buat aplikasi tersebut!!!
