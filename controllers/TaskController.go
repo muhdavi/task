@@ -49,7 +49,7 @@ func (TaskController) Detail(c *gin.Context) {
 func (TaskController) Create(c *gin.Context) {
 	db := database.Instance()
 	content := c.PostForm("content")
-	person := c.PostForm("person")
+	person := c.PostForm("content")
 
 	db.Create(&models.Task{Content: content, Person: person})
 
