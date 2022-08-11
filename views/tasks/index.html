@@ -6,37 +6,25 @@
       Create New Task
     </div>
     <div class="card-body">
-      <form class="row row-cols-lg-auto g-3 align-items-center" method="post">
-        <div class="col-12">
-          <label class="visually-hidden" for="content">Isi Task</label>
-          <div class="input-group">
-            <div class="input-group-text">Isi Task</div>
-            <input type="text" class="form-control" id="content" name="content" placeholder="Task">
-          </div>
-        </div>
+      <form class="row g-3 align-items-center" method="post">
 
-        <div class="col-12">
-          <label class="visually-hidden" for="person">Assign to</label>
-          <div class="input-group">
-            <div class="input-group-text">Assign to</div>
-            <input type="text" class="form-control" id="person" name="person" placeholder="Assign to">
+          <div class="col-sm-7">
+            <input type="text" class="form-control" id="content" name="content" placeholder="Task" aria-label="Task">
           </div>
-        </div>
-
-        <div class="col-12">
-          <label class="visually-hidden" for="duedate">Due Date</label>
-          <div class="input-group">
-            <div class="input-group-text">Due Date</div>
-            <input type="text" class="form-control" id="duedate" name="duedate" placeholder="Due Date">
+          <div class="col-sm-2">
+            <input type="text" class="form-control" id="person" name="person" placeholder="Assignee" aria-label="Assignee">
           </div>
-        </div>
+          <div class="col-sm">
+            <input type="text" class="form-control" id="due_date" name="due_date" placeholder="Due Date" aria-label="Due Date">
+          </div>
 
-        <div class="col-12">
+        <div class="col-sm">
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </form>
     </div>
   </div>
+
   <div class="card mt-4">
     <div class="card-header">
       Task Lists
@@ -45,17 +33,22 @@
       {{range $index, $task := .tasks}}
       <li class="list-group-item">
         {{if $task.IsDone}}
-        {{ add $index 1 }} - <del>{{ $task.Content }}</del>
+          {{ add $index 1 }} - <del>{{ $task.Content }}</del>
         {{ else }}
-        {{ add $index 1 }} - {{ $task.Content }} - {{ $task.Person }} - {{ $task.DueDate }}
+          {{ add $index 1 }} -
+          <span class="mark">{{ $task.Content }}</span> <i class="fa fa-minus"></i>
+          <span class="badge rounded-pill bg-secondary text-uppercase">{{ $task.Person }} </span> <i class="fa fa-minus"></i>
+          <span class="mark">{{ $task.DueDate.Format "02-08-2006" }}</span>
         {{ end }}
-        <a href="/tasks/{{ $task.ID }}/delete">Delete</a>
-        |
-        {{if $task.IsDone}}
-        <a href="/tasks/{{ $task.ID }}/done">UnDone</a>
-        {{ else }}
-        <a href="/tasks/{{ $task.ID }}/done">Done</a>
-        {{ end }}
+        <div class="float-end">
+          {{if $task.IsDone}}
+            <a href="/tasks/{{ $task.ID }}/done" class="btn btn-warning"><i class="fa fa-times"></i></a>
+          {{ else }}
+            <a href="/tasks/{{ $task.ID }}/done" class="btn btn-primary"><i class="fa fa-check"></i></a>
+          {{ end }}
+          <a href="/tasks/{{ $task.ID }}/edit" class="btn btn-success"><i class="fa fa-edit"></i></a>
+          <a href="/tasks/{{ $task.ID }}/delete" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+        </div>
       </li>
       {{ end }}
     </ul>

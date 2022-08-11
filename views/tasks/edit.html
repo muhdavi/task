@@ -1,0 +1,28 @@
+{{ define "tasks/edit" }}
+  {{ template "globals/before" .}}
+  <div class="container">
+    <div class="card mt-4">
+      <div class="card-header">
+        Edit New Task
+      </div>
+      <div class="card-body">
+        <form class="row g-3 align-items-center" method="POST">
+          <div class="col-sm-7">
+            <input type="text" class="form-control" id="content" name="content" value="{{ .task.Content }}" aria-label="Task">
+          </div>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" id="person" name="person" value="{{ .task.Person }}" aria-label="Assignee">
+          </div>
+          <div class="col-sm">
+            <input type="text" class="form-control" id="due_date" name="due_date" value="{{ .task.DueDate.Format "02-08-2022" }}" aria-label="Due Date">
+          </div>
+
+          <div class="col-sm">
+            <button type="submit" class="btn btn-primary">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {{ template "globals/after" .}}
+{{ end }}
